@@ -2,6 +2,8 @@ import { ChevronsUpDown, LogOut } from "lucide-react";
 import { useNavigate } from "react-router";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import type { UserRole } from "@/types/supabase";
+import { useSidebar } from "@/hooks/use-sidebar";
 import supabase from "@/lib/supabase";
 import {
   DropdownMenu,
@@ -16,11 +18,16 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { useSidebar } from "@/hooks/use-sidebar";
 
 interface INavUserProps {
-  user: { name: string; email: string; avatar: string };
+  user: { name: string; email: string; avatar: string; role: UserRole };
 }
+
+const roleTranslation = {
+  ADMIN: "Administrador",
+  CHIEF: "Jefe de área",
+  ADVISOR: "Asesor",
+};
 
 /**
  * Sidebar navigation user component
@@ -62,6 +69,9 @@ export const NavUser: React.FC<INavUserProps> = ({ user }) => {
                 <span className="truncate text-xs text-sidebar-foreground/70">
                   {user.email}
                 </span>
+                <span className="truncate text-xs text-sidebar-foreground/70">
+                  {roleTranslation[user.role]}
+                </span>
               </div>
               <ChevronsUpDown className="ml-auto size-4 opacity-50 group-data-[collapsible=icon]:hidden" />
             </SidebarMenuButton>
@@ -89,6 +99,9 @@ export const NavUser: React.FC<INavUserProps> = ({ user }) => {
                   <span className="truncate font-semibold">{user.name}</span>
                   <span className="truncate text-xs text-muted-foreground">
                     {user.email}
+                  </span>
+                  <span className="truncate text-xs text-muted-foreground">
+                    {roleTranslation[user.role]}
                   </span>
                 </div>
               </div>

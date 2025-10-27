@@ -43,6 +43,7 @@ export const AppSidebar: React.FC<React.ComponentProps<typeof Sidebar>> = ({
     name: user?.user_metadata.name || "",
     email: user?.email || "",
     avatar: user?.user_metadata.picture || user?.user_metadata.avatar_url || "",
+    role: userRole || "ADVISOR",
   };
 
   // Load user role
