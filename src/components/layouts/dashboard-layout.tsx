@@ -1,30 +1,29 @@
-import { AppSidebar } from "@/components/app-sidebar"
+import { Outlet, useLocation } from "react-router";
+
+import { AppSidebar } from "@/components/app-sidebar";
+import { Separator } from "@/components/ui/separator";
+import { ROUTE_TITLES } from "@/utils/constants";
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
+} from "@/components/ui/breadcrumb";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
-import { Outlet, useLocation } from "react-router"
+} from "@/components/ui/sidebar";
 
-const ROUTE_TITLES = {
-  "/dashboard/gestion-de-visitas": "Gestión de visitas",
-  "/dashboard/gestion-de-usuarios": "Gestión de usuarios",
-  "/dashboard/historial-de-cambios": "Historial de cambios",
-  "/dashboard/acerca-de": "Acerca de",
-}
-
-export const DashboardLayout = () => {
+/**
+ * Dashboard layout component
+ * @returns {React.FC} Dashboard layout component
+ */
+export const DashboardLayout: React.FC = () => {
   const location = useLocation();
   const title = ROUTE_TITLES[location.pathname as keyof typeof ROUTE_TITLES];
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -38,9 +37,9 @@ export const DashboardLayout = () => {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">
+                <span className="font-medium text-foreground">
                   Sistema de gestión de visitas
-                </BreadcrumbLink>
+                </span>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
@@ -50,12 +49,11 @@ export const DashboardLayout = () => {
           </Breadcrumb>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          <div className="bg-muted/50 min-h-screen flex-1 rounded-xl md:min-h-min" >
+          <div className="bg-muted/50 min-h-screen flex-1 rounded-xl md:min-h-min">
             <Outlet />
           </div>
         </div>
       </SidebarInset>
-
     </SidebarProvider>
-  )
-}
+  );
+};
