@@ -6,6 +6,12 @@ Sistema web integral para la administración eficiente de visitas, usuarios y á
 
 Sistema que permite gestionar de manera organizada las visitas empresariales e individuales, con un sistema robusto de autenticación, roles de usuario y seguimiento completo de auditoría.
 
+## IMPORTANTE ACCESO ROL ADMINISTRADOR
+
+Es necesario ingresar con el administrador para crear áreas y asignar roles de jefe de área:
+Correo: comfacauca.usuario@gmail.com
+Contraseña: comfacauca2025
+
 ## Funcionalidades Principales
 
 ### Gestión de Visitas
