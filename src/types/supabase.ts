@@ -1,37 +1,56 @@
+/**
+ * Database interface
+ * @interface Database
+ */
 export interface Database {
   public: {
     Tables: {
-      // Aquí puedes definir los tipos de tus tablas
-      // Ejemplo:
-      // users: {
-      //   Row: {
-      //     id: string;
-      //     email: string;
-      //     created_at: string;
-      //   };
-      //   Insert: {
-      //     id?: string;
-      //     email: string;
-      //     created_at?: string;
-      //   };
-      //   Update: {
-      //     id?: string;
-      //     email?: string;
-      //     created_at?: string;
-      //   };
-      // };
-    };
-    Views: {
-      [_ in never]: never;
-    };
-    Functions: {
-      [_ in never]: never;
-    };
-    Enums: {
-      [_ in never]: never;
-    };
-    CompositeTypes: {
-      [_ in never]: never;
+      Views: {
+        [_ in never]: never;
+      };
+      Functions: {
+        [_ in never]: never;
+      };
+      Enums: {
+        [_ in never]: never;
+      };
+      CompositeTypes: {
+        [_ in never]: never;
+      };
     };
   };
+}
+
+/**
+ * User role type
+ * @type {UserRole}
+ */
+export type UserRole = "ADMIN" | "CHIEF" | "ADVISOR";
+export type VisitStatus =
+  | "SCHEDULED"
+  | "IN_PROGRESS"
+  | "COMPLETED"
+  | "CANCELLED";
+
+/**
+ * Area interface
+ * @interface Area
+ */
+export interface Area {
+  id: string;
+  name: string;
+  description: string | null;
+  created_at: string;
+}
+
+/**
+ * Profile interface
+ * @interface Profile
+ */
+export interface Profile {
+  id: string;
+  email: string;
+  role: UserRole;
+  area_id: string | null;
+  created_at: string;
 }
