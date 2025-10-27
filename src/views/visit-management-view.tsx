@@ -186,10 +186,23 @@ export const VisitManagementView: React.FC = () => {
 
       if (error) throw error;
 
-      let formattedData: VisitData[] = (data || []).map((visit) => {
-        const advisor = extractSupabaseRelation(visit.advisor);
-        const objective = extractSupabaseRelation(visit.objective);
-        const visitType = extractSupabaseRelation(visit.visit_type);
+      type VisitQueryResult = {
+        id: string;
+        visit_date: string;
+        start_time: string;
+        end_time: string;
+        status: VisitStatus;
+        notes: string | null;
+        created_at: string;
+        advisor?: { id: string; email: string; area_id: string | null } | { id: string; email: string; area_id: string | null }[] | null;
+        objective?: { name: string } | { name: string }[] | null;
+        visit_type?: { name: string } | { name: string }[] | null;
+      };
+
+      let formattedData: VisitData[] = (data || []).map((visit: VisitQueryResult) => {
+        const advisor = extractSupabaseRelation<{ id: string; email: string; area_id: string | null }>(visit.advisor);
+        const objective = extractSupabaseRelation<{ name: string }>(visit.objective);
+        const visitType = extractSupabaseRelation<{ name: string }>(visit.visit_type);
 
         return {
           id: visit.id,

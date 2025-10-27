@@ -121,8 +121,8 @@ export const UserManagementView: React.FC = () => {
 
       if (error) throw error;
 
-      const formattedUsers: IUserData[] = (data || []).map((u) => {
-        const area = extractSupabaseRelation(u.area);
+      const formattedUsers: IUserData[] = (data || []).map((u: { id: string; email: string; role: string; area_id: string | null; created_at: string; area?: { name: string } | { name: string }[] | null }) => {
+        const area = extractSupabaseRelation<{ name: string }>(u.area);
         return {
           id: u.id,
           email: u.email,

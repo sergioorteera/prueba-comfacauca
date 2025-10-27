@@ -80,12 +80,12 @@ export const AreaManagementView: React.FC = () => {
       if (areasError) throw areasError;
 
       // For each area, load the chief and count advisors
-      const areasWithDetails = await Promise.all(
-        (areasData || []).map(async (area) => {
+      const areasWithDetails: IAreaWithDetails[] = await Promise.all(
+        (areasData || []).map(async (area: Area) => {
           // Load the chief of the area
           const { data: chief } = await supabase
             .from("profiles")
-            .select("id, email, role, area_id")
+            .select("id, email, role, area_id, created_at")
             .eq("area_id", area.id)
             .eq("role", "CHIEF")
             .maybeSingle();
@@ -99,7 +99,7 @@ export const AreaManagementView: React.FC = () => {
 
           return {
             ...area,
-            chief: chief || null,
+            chief: chief as Profile | null,
             advisors_count: advisorsCount || 0,
           };
         })

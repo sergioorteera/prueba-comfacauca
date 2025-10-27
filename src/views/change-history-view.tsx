@@ -186,12 +186,12 @@ export const ChangeHistoryView: React.FC = () => {
 
       // Get emails of users who made changes and advisors
       const changedByIds = [
-        ...new Set((data || []).map((d) => d.changed_by_id).filter(Boolean)),
+        ...new Set((data || []).map((d: AuditRawRecord) => d.changed_by_id).filter(Boolean)),
       ];
       const advisorIds = [
         ...new Set(
           (data || [])
-            .flatMap((d) => [d.old_advisor_id, d.new_advisor_id])
+            .flatMap((d: AuditRawRecord) => [d.old_advisor_id, d.new_advisor_id])
             .filter(Boolean)
         ),
       ];
